@@ -1,0 +1,54 @@
+
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bal Gita</title>
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #fffaf0; margin: 0; text-align: center; overflow-x: hidden; }
+        .feather { position: fixed; top: -50px; left: 15%; width: 50px; animation: float 10s linear infinite; pointer-events: none; z-index: 1000; }
+        @keyframes float { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(110vh) rotate(360deg); } }
+        header { background: linear-gradient(135deg, #ff9933, #ffcc33); color: white; padding: 20px; border-radius: 0 0 30px 30px; }
+        .stats-bar { background: white; display: inline-block; padding: 8px 20px; border-radius: 30px; margin: 15px 0; color: #e67e22; border: 2px solid #ffcc33; font-weight: bold; }
+        .quiz-box { background: #fff; margin: 20px; padding: 20px; border-radius: 20px; border: 3px dashed #ff9933; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .q-btn { background: #ff9933; color: white; border: none; padding: 12px 25px; border-radius: 50px; margin: 8px; font-weight: bold; cursor: pointer; }
+        .card { background: white; margin: 15px; padding: 20px; border-radius: 20px; text-align: left; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-left: 5px solid #ff9933; }
+        .sanskrit { font-weight: bold; color: #2c3e50; display: block; margin-bottom: 5px; }
+    </style>
+</head>
+<body onclick="playMusic()">
+    <img src="https://img.icons8.com/color/512/peacock-feather.png" class="feather">
+    <header>
+        <h1>🕉️ बाल गीता</h1>
+        <p>Krishna ji ki pyaari bansuri aur seekh</p>
+    </header>
+    <div class="stats-bar">⭐ Stars: <span id="stars">0</span> | 💰 Coins: <span id="coins">0</span></div>
+    <div class="quiz-box">
+        <h3>Chota Quiz 📝</h3>
+        <p>Arjun ke Saarthi (Charioteer) kaun the?</p>
+        <button class="q-btn" onclick="ans(true)">Shri Krishna</button>
+        <button class="q-btn" onclick="ans(false)">Bheem</button>
+        <p id="msg" style="font-weight:bold;"></p>
+    </div>
+    <div id="list"></div>
+    <audio id="bgm" loop><source src="https://www.chosic.com/wp-content/uploads/2021/07/The-Flute-Player.mp3" type="audio/mpeg"></audio>
+    <script>
+        let s=0, c=0;
+        function playMusic() { document.getElementById('bgm').play(); }
+        function ans(correct) {
+            let m = document.getElementById('msg');
+            if(correct) { s++; c+=10; m.innerText="Sahi Jawab! 🌟 +10 Coins"; m.style.color="green";
+                document.getElementById('stars').innerText=s; document.getElementById('coins').innerText=c;
+            } else { m.innerText="Try Again! 😊"; m.style.color="red"; }
+        }
+        const data = [
+            { n: "2.47", s: "कर्मण्येवाधिकारस्ते मा फलेषु कदाचन", m: "Bacho, sirf apni mehnat par dhyan do, result ki chinta mat karo." },
+            { n: "2.63", s: "क्रोधाद्भवति सम्मोहः...", m: "Gussa karne se humari akal kharab ho jati hai." }
+        ];
+        const container = document.getElementById('list');
+        data.forEach(item => {
+            container.innerHTML += `<div class="card"><b>SHLOKA ${item.n}</b><br><span class="sanskrit">${item.s}</span><p><b>Seekh:</b> ${item.m}</p></div>`;
+        });
+    </script>
+</body>
+</html>
